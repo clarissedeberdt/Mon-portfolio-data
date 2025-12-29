@@ -1,0 +1,16 @@
+[theme]
+# C'est TA couleur dominante (utilisée pour les boutons et l'accentuation)
+# J'ai mis un bleu canard moderne. Tu peux mettre du rose, du vert...
+primaryColor = "#0083B0"
+
+# La couleur de fond de la zone principale (très clair, presque blanc)
+backgroundColor = "#F8F9FB"
+
+# La couleur de fond de la barre latérale (un gris très léger pour contraster)
+secondaryBackgroundColor = "#EFF2F6"
+
+# La couleur du texte (Gris foncé, plus doux que le noir pur)
+textColor = "#262730"
+
+# La police d'écriture (sans serif c'est plus moderne)
+font = "sans serif"
