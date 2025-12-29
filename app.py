@@ -53,7 +53,7 @@ st.markdown("""
 # --- SIDEBAR ---
 with st.sidebar:
     # --- PROFIL (CENTRÉ) ---
-    st.image("https://media.licdn.com/dms/image/v2/D4E35AQHN7BLvjK1hNA/profile-framedphoto-shrink_400_400/B4EZrAn5JeHUAc-/0/1764168274813?e=1767427200&v=beta&t=MUIXe5MxcgEvqDna__T3T5BHjwkvap9d6eQrTinEtgM", width=180) 
+    st.image("https://media.licdn.com/dms/image/v2/D4E35AQEMFKPL7yzGLQ/profile-framedphoto-shrink_400_400/B4EZtpe9faIUAc-/0/1767001282768?e=1767607200&v=beta&t=bOdj3kRoVQKPDZnjvE5GEVcB5aE54QMZX08QpFvQHFw", width=180) 
     
     # Texte centré via HTML comme demandé
     st.markdown("<h2 style='text-align: center; color: #0083B0;'>Clarisse DEBERDT</h2>", unsafe_allow_html=True)
@@ -628,3 +628,4 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+ 
