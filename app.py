@@ -132,17 +132,19 @@ def load_data():
 
 # --- PAGE PRINCIPALE ---
 st.title("Hello, moi c'est Clarisse ! 👋")
+
 st.markdown("""
-**Future étudiante en Master Data**, je construis mon parcours avec une conviction précise : 
-la donnée n'a de valeur que si elle est utile aux humains qui l'utilisent.
+**Ma conviction ?** Un tableau de bord que personne ne comprend, c'est comme s'il **n'existait pas**.
 
-Ce qui m'anime aujourd'hui, c'est **l'envie d'avoir un impact concret**. Je ne cherche pas seulement à produire des graphiques, 
-mais à faire parler les données pour offrir des **recommandations claires**. Mon but est de transformer des données complexes 
-en réponses simples, afin de permettre à l'entreprise de se développer et de pérenniser son activité.
+Moi, c'est Clarisse. **Future étudiante en Master Data**, et ce qui m'anime aujourd'hui, c'est l'envie d'avoir un **impact concret**. 
+Mon objectif n'est pas seulement de créer des graphiques ou des tableaux de bord, mais de faire parler les données, de raconter leur histoire… et parfois même leur **avenir**.
+            
+Mais au-delà des compétences techniques, je suis convaincue que la réussite d'un projet passe aussi par l'humain. 
+D'un naturel **enthousiaste et positif**, j'ai à cœur d'apporter de la **bonne humeur** au sein d'une équipe, 
+de créer du lien et de partager des moments simples. Parce que je suis persuadée qu'on travaille toujours mieux dans un environnement bienveillant.
 
-Au-delà de la technique, je considère que la réussite d'un projet passe aussi par l'ambiance de travail. 
-D'un naturel **enthousiaste et positive**, j'ai à cœur d'apporter ma bonne humeur au sein d'une équipe, 
-car je suis persuadée qu'on travaille mieux dans un environnement bienveillant. ☀️
+Et puis, si je peux aussi ensoleiller vos journées, c'est un bonus ☀️
+Le **sourire** fait partie de ma façon de travailler 😄
 
 🚀 *Actuellement en auto-formation, je prépare le terrain pour rejoindre une entreprise en **alternance dès septembre 2026**.*
 """)
@@ -161,19 +163,19 @@ step1, step2, step3, step4 = st.columns(4)
 with step1:
     # J'ai remplacé "####" par "#####" pour réduire la taille
     st.markdown("##### 1. Cadrer 🎯")
-    st.caption("Comprendre le besoin métier et définir les objectifs avant de foncer dans le code.")
+    st.caption("Avant de foncer dans le code, je commence comme avant un voyage 🌍 : je regarde la carte, je définis la destination et les objectifs. Cela me permet de savoir où aller et comment explorer les données ensuite.")
 
 with step2:
     st.markdown("##### 2. Nettoyer 🧹")
-    st.caption("Préparation des données (Excel/Pandas), gestion des valeurs manquantes et formatage.")
+    st.caption("Ici, c’est comme ranger une pièce. Au début, c’est un peu le bazar, à la fin tout est propre 🙂 Je prépare et nettoie les données avec Excel et Pandas (valeurs manquantes, formats, cohérence...).")
 
 with step3:
     st.markdown("##### 3. Analyser 🔎")
-    st.caption("Exploration (SQL/Python) pour faire émerger les tendances et les patterns cachés.")
+    st.caption("J’explore ensuite les données avec SQL et Python pour faire ressortir les tendances et comprendre ce que les chiffres racontent vraiment, un peu comme relier les pièces d’un puzzle pour voir l’image dans son ensemble.")
 
 with step4:
     st.markdown("##### 4. Restituer 📊")
-    st.caption("Visualisation claire (Plotly) et storytelling pour faciliter la prise de décision.")
+    st.caption("Enfin, je transforme les analyses en visuels clairs avec différentes bibliothèques (Plotly, Seaborn, Matplotlib) et je raconte l’histoire des données pour aider à la prise de décision.")
 
 st.write("---")
 
@@ -211,7 +213,7 @@ with st.container(border=True):
     st.subheader("📊 Projet 1 : Tendances Tech par Pays")
     
     st.write("L'objectif est de comparer les langages utilisés dans les principaux hubs technologiques mondiaux pour orienter une stratégie de recrutement.")
-    st.markdown("**❓ Question : Existe-t-il des spécificités locales dans l'adoption des langages Data ?**")
+    st.markdown("**❓ Question : Existe-t-il des spécificités géographiques dans l'adoption des langages Data ?**")
 
     if 'df' in locals():
         # TRAITEMENT PANDAS
@@ -241,17 +243,19 @@ with st.container(border=True):
         # LE VRAI CODE DE GÉNÉRATION EXPLIQUÉ
         with st.expander("👉 Voir le code Python (Plotly)"):
             st.code("""
-# 1. Préparation des données (Pandas)
-# On filtre d'abord pour ne garder que les 10 pays principaux
+# Étape 1 :  je me concentre sur l’essentiel 
+# Je garde uniquement les données des 10 pays les plus représentés,
+# pour éviter de me disperser et faciliter la lecture des résultats.
 df_filtered = df[df['Country'].isin(top_10_countries)]
 
-# Transformation clé : .explode()
-# Une cellule contenant "Python;SQL" est divisée en deux lignes distinctes.
-# Cela permet de compter chaque langage individuellement.
+# Étape 2 : je remets les données à plat 
+# Certaines réponses contiennent plusieurs langages dans une seule case (ex : "Python;SQL").
+# Je les sépare donc en plusieurs lignes, un langage par ligne, 
+# afin de les compter et comparer correctement.
 df_final = df_filtered.assign(Language=df['LanguageHaveWorkedWith'].str.split(';')).explode('Language')
 
-# 2. Création du graphique interactif (Plotly Express)
-# barmode='group' permet de comparer les langages côte à côte pour chaque pays
+# Étape 3 : création d'une visualisation claire et interactive 
+# Permet de visualiser les langages les plus utilisés pays par pays.
 fig = px.histogram(
     df_final, 
     x='Country', 
@@ -261,7 +265,7 @@ fig = px.histogram(
     title="Top 10 Langages par Pays"
 )
 
-# Amélioration du design (fond blanc propre)
+# Étape 4 : j'ai soigné la présentation avec un fond blanc pour un rendu plus propre
 fig.update_layout(plot_bgcolor="white")
 fig.show()
             """, language="python")
@@ -296,18 +300,20 @@ with st.container(border=True):
         # LE VRAI CODE DE GÉNÉRATION EXPLIQUÉ
         with st.expander("👉 Voir le code Python (Plotly)"):
             st.code("""
-# 1. Calcul des fréquences (Pandas)
-# La colonne brute contient des listes : "MySQL;PostgreSQL;MongoDB"
-# .stack() empile toutes les valeurs pour les mettre dans une seule colonne
-# .value_counts() compte ensuite chaque occurrence unique
+# Étape 1 : comprendre quelles bases de données sont les plus utilisées 
+# Certaines réponses sont contenues dans une seule case (ex : "MySQL;PostgreSQL;MongoDB").
+# Je les sépare donc pour pouvoir compter chaque technologie individuellement,
+# puis je garde les 15 bases de données les plus citées.
 db_counts = df['DatabaseHaveWorkedWith'].str.split(';', expand=True).stack().value_counts().head(15)
 
-# On remet l'index à plat pour que Plotly puisse lire les colonnes X et Y
+# Étape 2 : préparation des données pour la visualisation 
+# Je remets les données sous une forme simple (une colonne = une information),
 df_db = db_counts.reset_index()
 df_db.columns = ['Base de Données', 'Nombre']
 
-# 2. Création du graphique (Plotly Express)
-# On choisit un Bar Chart simple avec une couleur unique pour la clarté
+# Étape 3 : création d'un graphique clair et lisible 
+# Un diagramme en barres simple permet de comparer facilement
+# la popularité des différentes bases de données.
 fig = px.bar(
     df_db, 
     x='Base de Données', 
@@ -316,7 +322,7 @@ fig = px.bar(
     title="Top 15 Bases de Données"
 )
 
-# Nettoyage de l'interface (axes et fond)
+# Étape 4 : j'ai soigné le rendu final avec un fond blanc et des axes clairs
 fig.update_layout(xaxis_title="Technologie", plot_bgcolor="white")
 fig.show()
             """, language="python")
@@ -334,9 +340,7 @@ st.header("❤️ Mes Passions")
 # Phrase d'intro "Jeu de mots"
 st.markdown("""
 <div style="text-align: justify; font-style: italic;">
-    La curiosité est le moteur de tout bon Data Analyst. Quand je ne suis pas en train de faire parler des datasets, 
-    je pars explorer le monde, faire du sport ou écouter de la musique. 
-    J'ai voulu appliquer mes compétences de visualisation à ce qui me fait vibrer au quotidien.
+    Lorsque je ne suis pas entrain de faire parler les données, je pars explorer le monde, faire du sport, ou écouter de la musique. Pour en apprendre un peu plus sur moi, voici un retour en images de mes passions sous formes de visualisations interactives.
 </div>
 """, unsafe_allow_html=True)
 
@@ -435,7 +439,7 @@ with tab1:
     st.plotly_chart(fig_map, use_container_width=True)
     
     # 3. Détail du Road Trip avec Lien LinkedIn
-    with st.expander("🚙 Détails sur mon tour de l'Europe : Le défi KET 2025 (1€/jour)"):
+    with st.expander("🚙 Détails sur mon tour de l'Europe en auto-stop avec 1€/jour"):
         st.markdown("""
         <div style="text-align: justify;">
             <p>
@@ -443,14 +447,18 @@ with tab1:
                 ce défi solidaire organisé par l'association <i>Adrénaline Kedge Bordeaux</i> m'a poussée dans mes retranchements.
             </p>
             <p>
-                <b>La Mission :</b> De Bordeaux à Paris (Bordeaux → Lyon → Zurich → Salzbourg → Prague → Amsterdam → Paris), nous avons avancé uniquement en auto-stop, 
-                en négociant hébergement et nourriture chaque soir. Au-delà de l'aventure sportive, nous avons collecté des fonds 
-                pour <b>Life ONG</b> afin de lutter contre la pauvreté. Une véritable école de la débrouillardise et de la négociation !
+                <b>L'itinéraire :</b> Bordeaux → Lyon → Zurich → Salzbourg → Prague → Amsterdam → Paris → Bordeaux.
+            </p>
+            <p>    
+                <b>La Mission :</b> Nous avons avancé uniquement en auto-stop, 
+                en négociant hébergement et nourriture chaque soir. Mais au-delà de l'aventure sportive, 
+                ce projet était avant tout un <b>défi à but caritatif</b> : nous avons récolté des fonds pour <b>Life ONG</b> 
+                afin de lutter contre la pauvreté. Une expérience humaine et enrichissante, pleine de rencontres, de débrouillardise et de négociations ! 
             </p>
         </div>
         """, unsafe_allow_html=True)
         
-        st.link_button("🚀 Voir le récit complet et les photos sur LinkedIn", "https://www.linkedin.com/feed/update/urn:li:activity:7300911140312616960/")
+        st.link_button("🚀 Clique ici afin de voir le récit complet de ce projet dingue ainsi que les photos (LinkedIn)", "https://www.linkedin.com/feed/update/urn:li:activity:7300911140312616960/")
 
 # --- ONGLET 2 : SPORT ---
 with tab2:
@@ -459,8 +467,9 @@ with tab2:
     st.markdown("""
     <div style="text-align: justify;">
         <p>
-            Le sport est essentiel à mon équilibre mental et physique. Il m'apprend la persévérance, 
-            la gestion de l'effort et l'esprit d'équipe. Voici la répartition de mon temps sportif !
+            Le sport… le sport… le sport ! C'est bien plus qu'une activité, c'est ma façon de me dépasser, 
+            de gérer le stress et la pression, et surtout d'apprendre l'esprit d'équipe. 
+            Je vous laisse découvrir comment je répartis mon temps sportif ci-dessous !
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -508,9 +517,8 @@ with tab3:
     st.markdown("""
     <div style="text-align: justify;">
         <p>
-            Avec près de <b>80 000 minutes</b> d'écoute cette année, la musique est mon moteur. 
-            On remarque une corrélation directe entre mes styles d'écoute et mes phases de travail : 
-            du <b>Néo-classique</b> pour la concentration (Deep Work) et de l'<b>Électro/Pop</b> pour le dynamisme.
+            Avec près de <b>80 000 minutes</b> d'écoute cette année, la musique est vraiment mon moteur. 
+            Besoin de me concentrer ? J'écoute du Néo-classique. Besoin de dynamisme ? J'écoute de l'Électro et de la Pop pour donner le rythme à ma journée.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -591,7 +599,7 @@ with tab3:
 
     # 3. LE COIN TECHNIQUE (SQL)
     st.write("")
-    with st.expander("👩‍💻 Tech Corner : La requête SQL derrière ces chiffres"):
+    with st.expander("👉 Derrière les chiffres : comment SQL m’a permis de trouver mon artiste préféré"):
         st.write("""
         Pour obtenir mon temps d'écoute total et identifier mon artiste n°1, j'utilise ici les fondamentaux de l'analyse SQL : 
         l'agrégation (`SUM`, `COUNT`) et le regroupement (`GROUP BY`).
