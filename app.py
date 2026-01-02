@@ -6,10 +6,6 @@ import plotly.express as px
 # --- CONFIGURATION DE LA PAGE ---
 st.set_page_config(page_title="Portfolio Clarisse DEBERDT", page_icon="👩‍💻", layout="wide")
 
-# --- STYLE CSS (Minimaliste) ---
-import streamlit as st
-import os
-
 # --- STYLE CSS ---
 st.markdown("""
     <style>
@@ -66,33 +62,66 @@ with st.sidebar:
     st.link_button("🐙 GitHub", "https://github.com/clarissedeberdt", use_container_width=True)
     
     # BOUTON CV (Indispensable)
-    with open("CV_Clarisse_Deberdt.pdf", "rb") as pdf_file:
-        st.download_button(
-            label="📄 Télécharger mon CV",
-            data=pdf_file,
-            file_name="CV_Clarisse_Deberdt.pdf",
-            mime="application/pdf",
-            use_container_width=True
-        )
+    if os.path.exists("CV_Clarisse_Deberdt.pdf"):
+        with open("CV_Clarisse_Deberdt.pdf", "rb") as pdf_file:
+            st.download_button(
+                label="📄 Télécharger mon CV",
+                data=pdf_file,
+                file_name="CV_Clarisse_Deberdt.pdf",
+                mime="application/pdf",
+                use_container_width=True
+            )
     st.write("---")
     
-    # --- HARD SKILLS (ALIGNÉS À GAUCHE) ---
-    # Retour à l'alignement par défaut (gauche) pour la lisibilité
+    # --- HARD SKILLS (Style "Badges" Modernes) ---
     st.markdown("### 🛠️ Compétences Techniques")
     
-    st.write("🐍 Python · 🐼 Pandas")
-    st.write("💾 SQL · 💚 Excel")
-    st.write("📊 PowerBI · ⚙️ Automatisation")
-    st.write("📈 Plotly · 🎨 Seaborn")
+    # On définit le style CSS des badges une fois pour toutes
+    badge_style = """
+    <style>
+    .skill-badge {
+        background-color: #f0f2f6;
+        color: #31333F;
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin: 2px;
+        display: inline-block;
+        font-size: 0.9em;
+        font-weight: 500;
+    }
+    </style>
+    """
+    st.markdown(badge_style, unsafe_allow_html=True)
+
+    # Liste des compétences techniques
+    hard_skills = [
+        "Python", "Pandas", "SQL", "Excel", 
+        "PowerBI", "Automatisation", "Plotly", "Seaborn"
+    ]
+    
+    # Génération automatique des badges
+    html_hard = ""
+    for skill in hard_skills:
+        html_hard += f'<span class="skill-badge">{skill}</span>'
+    
+    st.markdown(html_hard, unsafe_allow_html=True)
     
     st.write("---")
 
-    # --- SOFT SKILLS (ALIGNÉS À GAUCHE) ---
+    # --- SOFT SKILLS (Même style) ---
     st.markdown("### 🧠 Soft Skills")
-    st.write("🗣️ Communication")
-    st.write("🧐 Esprit Analytique & Résolution de problèmes")
-    st.write("💡 Curiosité & Rigueur")
-
+    
+    soft_skills = [
+        "Communication", "Esprit Analytique", 
+        "Résolution de problèmes", "Curiosité", "Rigueur"
+    ]
+    
+    html_soft = ""
+    for skill in soft_skills:
+        html_soft += f'<span class="skill-badge">{skill}</span>'
+    
+    st.markdown(html_soft, unsafe_allow_html=True)
+    
     st.write("")
 
     # --- LANGUES ---
@@ -104,8 +133,9 @@ with st.sidebar:
     st.subheader("🎓 Diplômes & Certifications")
     
     # IBM
-    st.markdown("**IBM Data Analyst (déc. 2025)**")
-    st.link_button("Voir le certificat", "https://www.coursera.org/account/accomplishments/specialization/HN9P6HM29J5Q", use_container_width=True)
+    st.markdown("""
+    **IBM Data Analyst (déc. 2025)** 🔗 [Voir le certificat](https://www.coursera.org/account/accomplishments/specialization/HN9P6HM29J5Q)
+    """)
     
     if os.path.exists("certificat_IBM.png"):
         with st.expander("Voir la capture"):
@@ -125,6 +155,7 @@ with st.sidebar:
     elif os.path.exists("Clarisse_Deberdt_Diplome_Kedge.jpg"):
         with st.expander("Voir le diplôme"):
             st.image("Clarisse_Deberdt_Diplome_Kedge.jpg")
+
 # --- CHARGEMENT DES DONNÉES ---
 @st.cache_data
 def load_data():
@@ -136,10 +167,10 @@ st.title("Hello, moi c'est Clarisse ! 👋")
 st.markdown("""
 **Ma conviction ?** Un tableau de bord que personne ne comprend, c'est comme s'il **n'existait pas**.
 
-Moi, c'est Clarisse. **Future étudiante en Master Data**, et ce qui m'anime aujourd'hui, c'est l'envie d'avoir un **impact concret**. 
+Moi, c'est Clarisse. **Future étudiante en Master Data** et ce qui m'anime aujourd'hui, c'est l'envie d'avoir un **impact concret**. 
 Mon objectif n'est pas seulement de créer des graphiques ou des tableaux de bord, mais de faire parler les données, de raconter leur histoire… et parfois même leur **avenir**.
             
-Mais au-delà des compétences techniques, je suis convaincue que la réussite d'un projet passe aussi par l'humain. 
+Au-delà des compétences techniques, je suis convaincue que la réussite d'un projet passe aussi par l'humain. 
 D'un naturel **enthousiaste et positif**, j'ai à cœur d'apporter de la **bonne humeur** au sein d'une équipe, 
 de créer du lien et de partager des moments simples. Parce que je suis persuadée qu'on travaille toujours mieux dans un environnement bienveillant.
 
@@ -159,24 +190,21 @@ st.header("⚙️ Ma Méthodologie")
 
 # Mise en page en 4 colonnes
 step1, step2, step3, step4 = st.columns(4)
-
 with step1:
-    # J'ai remplacé "####" par "#####" pour réduire la taille
     st.markdown("##### 1. Cadrer 🎯")
     st.caption("Avant de foncer dans le code, je commence comme avant un voyage 🌍 : je regarde la carte, je définis la destination et les objectifs. Cela me permet de savoir où aller et comment explorer les données ensuite.")
 
 with step2:
     st.markdown("##### 2. Nettoyer 🧹")
-    st.caption("Ici, c’est comme ranger une pièce. Au début, c’est un peu le bazar, à la fin tout est propre 🙂 Je prépare et nettoie les données avec Excel et Pandas (valeurs manquantes, formats, cohérence...).")
+    st.caption("Ici, c'est comme ranger une pièce. Au début, c'est un peu le bazar, à la fin tout est propre 🙂 Je prépare et nettoie les données avec Excel et Pandas (valeurs manquantes, formats, cohérence...).")
 
 with step3:
     st.markdown("##### 3. Analyser 🔎")
-    st.caption("J’explore ensuite les données avec SQL et Python pour faire ressortir les tendances et comprendre ce que les chiffres racontent vraiment, un peu comme relier les pièces d’un puzzle pour voir l’image dans son ensemble.")
+    st.caption("J'explore ensuite les données avec SQL et Python pour faire ressortir les tendances et comprendre ce que les chiffres racontent vraiment, un peu comme relier les pièces d'un puzzle pour voir l'image dans son ensemble.")
 
 with step4:
     st.markdown("##### 4. Restituer 📊")
-    st.caption("Enfin, je transforme les analyses en visuels clairs avec différentes bibliothèques (Plotly, Seaborn, Matplotlib) et je raconte l’histoire des données pour aider à la prise de décision.")
-
+    st.caption("Enfin, je transforme les analyses en visuels clairs avec différentes bibliothèques (Plotly, Seaborn, Matplotlib) et je raconte l'histoire des données pour aider à la prise de décision.")
 st.write("---")
 
 st.header("📂 Mes Projets Data")
@@ -193,16 +221,17 @@ try:
     </div>
     """, unsafe_allow_html=True)
 
-    with open("survey_data.zip", "rb") as file:
-        st.download_button(
-            label="📥 Télécharger les données sources (.zip)",
-            data=file,
-            file_name="survey_data.zip",
-            mime="text/zip"
-        )
+    if os.path.exists("survey_data.zip"):
+        with open("survey_data.zip", "rb") as file:
+            st.download_button(
+                label="📥 Télécharger les données sources (.zip)",
+                data=file,
+                file_name="survey_data.zip",
+                mime="text/zip"
+            )
 
 except Exception as e:
-    st.error(f"Erreur de chargement : {e}")
+    st.error(f"Erreur de chargement des données : {e}")
 
 st.write("") 
 
@@ -329,7 +358,7 @@ fig.show()
 
     st.success("✅ **Insight :** Le SQL reste roi (PostgreSQL/MySQL > 45%). Cependant MongoDB s'impose comme la première alternative NoSQL majeure, confirmant son évolution croissante.")
 
-    # ==========================================
+# ==========================================
 # SECTION PASSIONS (AVEC ONGLETS)
 # ==========================================
 st.write("---")
@@ -338,8 +367,9 @@ st.write("---")
 st.header("❤️ Mes Passions")
 
 # Phrase d'intro "Jeu de mots"
+# MODIFICATION ICI : text-align: left;
 st.markdown("""
-<div style="text-align: justify; font-style: italic;">
+<div style="text-align: left; font-style: italic;">
     Lorsque je ne suis pas entrain de faire parler les données, je pars explorer le monde, faire du sport, ou écouter de la musique. Pour en apprendre un peu plus sur moi, voici un retour en images de mes passions sous formes de visualisations interactives.
 </div>
 """, unsafe_allow_html=True)
@@ -353,8 +383,9 @@ tab1, tab2, tab3 = st.tabs(["🌍 Data Trotter", "🏅 Sport Analytics", "🎵 M
 with tab1:
     st.subheader("🗺️ Mapping de mes explorations")
     
+    # MODIFICATION ICI : text-align: left;
     st.markdown("""
-    <div style="text-align: justify;">
+    <div style="text-align: left;">
         <p>
             Chaque point sur cette carte raconte une histoire. J'utilise ici une carte choroplèthe pour visualiser 
             mes voyages passés et... mes futures destinations. <b> Passe la souris dessus !😉</b>
@@ -440,8 +471,9 @@ with tab1:
     
     # 3. Détail du Road Trip avec Lien LinkedIn
     with st.expander("🚙 Détails sur mon tour de l'Europe en auto-stop avec 1€/jour"):
+        # MODIFICATION ICI : text-align: left;
         st.markdown("""
-        <div style="text-align: justify;">
+        <div style="text-align: left;">
             <p>
                 <b>Le Challenge :</b> 8 jours, 6 pays traversés, et seulement 1€ par jour ! Inspiré de Pékin Express, 
                 ce défi solidaire organisé par l'association <i>Adrénaline Kedge Bordeaux</i> m'a poussée dans mes retranchements.
@@ -465,7 +497,7 @@ with tab2:
     st.subheader("🏅 Sport Analytics : Mon équilibre")
     
     st.markdown("""
-    <div style="text-align: justify;">
+    <div style="text-align: left;">
         <p>
             Le sport… le sport… le sport ! C'est bien plus qu'une activité, c'est ma façon de me dépasser, 
             de gérer le stress et la pression, et surtout d'apprendre l'esprit d'équipe. 
@@ -477,7 +509,7 @@ with tab2:
     # 1. Données
     data_sport = {
         'Sport': ['Handball 🤾‍♀️', 'Musculation 🏋️‍♀️', 'Course à pied 🏃‍♀️'],
-        'Part': [50, 25, 25] # 50% Hand, 25% Muscu, 25% Run
+        'Part': [50, 25, 25]
     }
     df_sport = pd.DataFrame(data_sport)
 
@@ -486,27 +518,34 @@ with tab2:
         df_sport, 
         values='Part', 
         names='Sport',
-        hole=0.5, # Crée le trou au milieu (Donut Chart)
-        color_discrete_sequence=['#B39DDB', '#A9DFBF', '#AED6F1'] # Violet (Hand), Vert (Muscu), Bleu (Run)
+        hole=0.5,
+        color_discrete_sequence=['#B39DDB', '#A9DFBF', '#AED6F1']
     )
 
-    # 3. Customisation
+    # 3. Customisation RESPONSIVE
     fig_sport.update_traces(
-        textinfo='percent+label', # Affiche le % et le nom
-        textposition='outside',   # Texte à l'extérieur pour la lisibilité
-        marker=dict(line=dict(color='#FFFFFF', width=2)) # Bordure blanche autour des parts
+        textinfo='percent',    # On affiche QUE le pourcentage sur le graph
+        textposition='inside', # On le force à l'intérieur pour ne rien couper
+        textfont_size=14,      # On grossit un peu le texte
+        marker=dict(line=dict(color='#FFFFFF', width=2))
     )
     
     fig_sport.update_layout(
-        showlegend=False, # On cache la légende car les labels sont déjà sur le graphique
-        paper_bgcolor='rgba(0,0,0,0)', # Fond transparent
+        showlegend=True,       # On réactive la légende pour savoir ce que c'est
+        legend=dict(
+            orientation="h",   # Légende Horizontale
+            yanchor="bottom",
+            y=-0.2,            # On la place en dessous du graphique
+            xanchor="center",
+            x=0.5
+        ),
+        paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        margin={"r":0,"t":40,"l":0,"b":0} # Marges ajustées
+        margin={"r":0,"t":20,"l":0,"b":50} # On laisse de la place en bas pour la légende
     )
 
     st.plotly_chart(fig_sport, use_container_width=True)
 
-    # Petit texte explicatif
     st.info("💡 **Le Handball** reste ma discipline de cœur, celle qui m'a appris l'esprit d'équipe et la stratégie. La musculation et la course viennent compléter ma préparation physique.")
 
 # --- ONGLET 3 : MUSIQUE ---
@@ -514,8 +553,9 @@ with tab3:
     # Titre simplifié comme demandé
     st.subheader("🎵 Analyse de ma Rétrospective Spotify 2025")
     
+    # MODIFICATION ICI : text-align: left;
     st.markdown("""
-    <div style="text-align: justify;">
+    <div style="text-align: left;">
         <p>
             Avec près de <b>80 000 minutes</b> d'écoute cette année, la musique est vraiment mon moteur. 
             Besoin de me concentrer ? J'écoute du Néo-classique. Besoin de dynamisme ? J'écoute de l'Électro et de la Pop pour donner le rythme à ma journée.
@@ -620,7 +660,7 @@ LIMIT 1;
         
         st.caption("Une requête simple mais efficace pour extraire des tendances à partir de données brutes.")
 
-       # ==========================================
+# ==========================================
 # FOOTER (Message personnel)
 # ==========================================
 st.write("---")
@@ -628,7 +668,7 @@ st.write("---")
 st.markdown("""
 <div style="text-align: center; color: #636E72; font-size: 0.9em; font-style: italic;">
     <p>
-        Ce portfolio a été conçu avec passion, en alliant mes compétences techniques, ma curiosité autodidacte et l'assistance de l'Intelligence Artificielle. 🦾💜<br>
+        Ce portfolio a été codé avec passion, en alliant mes compétences techniques, ma curiosité autodidacte et l'assistance de l'Intelligence Artificielle. 🦾💜<br>
         Une preuve que l'humain et la machine peuvent collaborer pour créer de belles choses.
     </p>
     <p>
@@ -636,4 +676,3 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
- 
