@@ -16,6 +16,8 @@ st.markdown("""
     /* 1. CIBLAGE DE LA PHOTO DE PROFIL UNIQUEMENT */
     /* On vise la première image de la sidebar pour la mettre en rond et centrée */
     [data-testid="stSidebar"] > div > div > div > div:first-of-type img {
+        width: 180px !important;   /* On force la taille VISUELLE ici */
+        height: 180px !important;  /* On force la hauteur égale à la largeur */
         border-radius: 50%;
         object-fit: cover; 
         aspect-ratio: 1 / 1;
@@ -49,7 +51,7 @@ st.markdown("""
 # --- SIDEBAR ---
 with st.sidebar:
     # --- PROFIL (CENTRÉ) ---
-    st.image("https://media.licdn.com/dms/image/v2/D4E35AQEMFKPL7yzGLQ/profile-framedphoto-shrink_400_400/B4EZtpe9faIUAc-/0/1767001282768?e=1767607200&v=beta&t=bOdj3kRoVQKPDZnjvE5GEVcB5aE54QMZX08QpFvQHFw", width=180) 
+    st.image("./image_moi_linkedin.png") 
     
     # Texte centré via HTML comme demandé
     st.markdown("<h2 style='text-align: center; color: #0083B0;'>Clarisse DEBERDT</h2>", unsafe_allow_html=True)
@@ -121,7 +123,7 @@ with st.sidebar:
         html_soft += f'<span class="skill-badge">{skill}</span>'
     
     st.markdown(html_soft, unsafe_allow_html=True)
-    
+
     st.write("")
 
     # --- LANGUES ---
