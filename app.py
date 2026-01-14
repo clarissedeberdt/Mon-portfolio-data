@@ -164,7 +164,19 @@ def load_data():
     return pd.read_csv("survey_data.zip", compression='zip')
 
 # --- PAGE PRINCIPALE ---
-st.title("Hello, moi c'est Clarisse ! 👋")
+# --- TITRE AVEC DÉGRADÉ SUR "CLARISSE" UNIQUEMENT ---
+st.markdown("""
+    <style>
+    .gradient-text {
+        background: linear-gradient(to right, #9b59b6, #dc2430); /* Dégradé Violet -> Rouge/Rose */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold; /* Juste pour mettre en valeur le prénom */
+    }
+    </style>
+    
+    <h1>Hello, moi c'est <span class="gradient-text">Clarisse</span> ! 👋</h1>
+    """, unsafe_allow_html=True)
 
 st.markdown("""
 **Ma conviction ?** Un tableau de bord que personne ne comprend, c'est comme s'il **n'existait pas**.
