@@ -329,7 +329,7 @@ try:
     
     st.markdown(f"""
     <div class="context-box">
-        <b>Contexte :</b> Les analyses suivantes sont basées sur le dataset public <i>StackOverflow Developer Survey</i> ({nb_lignes:,} lignes).
+        <b>Contexte :</b> Les analyses suivantes sont basées sur le dataset public <i>StackOverflow Developer Survey</i> (64,000 lignes).
         L'objectif est de détecter les tendances du marché Tech actuel.
     </div>
     """, unsafe_allow_html=True)
