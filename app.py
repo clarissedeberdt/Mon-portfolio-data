@@ -199,7 +199,7 @@ def section_title(titre):
 # --- FONCTION DE CHARGEMENT DES DONNÉES ---
 @st.cache_data
 def load_data():
-    csv_path = "survey_results_public.csv"
+    csv_path = "survey_data.zip"
     if os.path.exists(csv_path):
         return pd.read_csv(csv_path, usecols=['Country', 'LanguageHaveWorkedWith', 'DatabaseHaveWorkedWith'])
     else:
